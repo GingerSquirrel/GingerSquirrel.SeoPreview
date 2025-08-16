@@ -1,0 +1,39 @@
+<Project>
+  
+  <!-- Copy static assets to consuming project's wwwroot during build -->
+  <Target Name="CopyGingerSquirrelSeoPreviewAssets" BeforeTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'">
+    
+    <!-- Define the source files from the package -->
+    <ItemGroup>
+      <GingerSquirrelSeoPreviewAssets Include="$(MSBuildThisFileDirectory)..\staticwebassets\App_Plugins\GingerSquirrelSeoPreview\**\*.*" />
+    </ItemGroup>
+    
+    <!-- Create the App_Plugins directory if it doesn't exist -->
+    <MakeDir Directories="$(MSBuildProjectDirectory)\wwwroot\App_Plugins\GingerSquirrelSeoPreview" 
+             Condition="!Exists('$(MSBuildProjectDirectory)\wwwroot\App_Plugins\GingerSquirrelSeoPreview')" />
+    
+    <!-- Copy files from package to wwwroot -->
+    <Copy SourceFiles="@(GingerSquirrelSeoPreviewAssets)" 
+          DestinationFiles="@(GingerSquirrelSeoPreviewAssets->'$(MSBuildProjectDirectory)\wwwroot\App_Plugins\GingerSquirrelSeoPreview\%(RecursiveDir)%(Filename)%(Extension)')" 
+          SkipUnchangedFiles="true"
+          Condition="@(GingerSquirrelSeoPreviewAssets->Count()) > 0" />
+    
+    <Message Importance="high" Text="GingerSquirrel.SeoPreview: Copied @(GingerSquirrelSeoPreviewAssets->Count()) static assets to wwwroot/App_Plugins" 
+             Condition="@(GingerSquirrelSeoPreviewAssets->Count()) > 0" />
+             
+  </Target>
+
+  <!-- Clean up assets when project is cleaned -->
+  <Target Name="CleanGingerSquirrelSeoPreviewAssets" BeforeTargets="Clean">
+    <ItemGroup>
+      <GingerSquirrelSeoPreviewFilesToDelete Include="$(MSBuildProjectDirectory)\wwwroot\App_Plugins\GingerSquirrelSeoPreview\**\*.*" />
+    </ItemGroup>
+    
+    <Delete Files="@(GingerSquirrelSeoPreviewFilesToDelete)" />
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\wwwroot\App_Plugins\GingerSquirrelSeoPreview" 
+               Condition="Exists('$(MSBuildProjectDirectory)\wwwroot\App_Plugins\GingerSquirrelSeoPreview')" />
+               
+    <Message Importance="high" Text="GingerSquirrel.SeoPreview: Cleaned static assets from wwwroot/App_Plugins" />
+  </Target>
+
+</Project>

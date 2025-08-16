@@ -1,0 +1,25 @@
+# Build outputs
+bin/
+obj/
+*.nupkg
+
+# Client dependencies and build outputs
+Client/node_modules/
+Client/dist/
+wwwroot/App_Plugins/GingerSquirrelSeoPreview/*.js
+wwwroot/App_Plugins/GingerSquirrelSeoPreview/*.js.map
+
+# IDE and editor files
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# OS generated files
+Thumbs.db
+.DS_Store
