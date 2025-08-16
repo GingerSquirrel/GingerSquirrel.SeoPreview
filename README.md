@@ -5,6 +5,8 @@
 
 A comprehensive SEO preview property editor for Umbraco that provides real-time Google search result previews, character count validation, and intuitive meta title and description editing.
 
+**Compatibility:** Only works with Umbraco 16.0 and above. Requires .NET 9.0 or later.
+
 ## Features
 
 - 🔍 **Real-time Google Search Preview** - See exactly how your page will appear in Google search results
@@ -15,7 +17,13 @@ A comprehensive SEO preview property editor for Umbraco that provides real-time 
 
 ## Installation
 
-### Via NuGet Package Manager
+### Requirements
+
+- Umbraco 16.0 or later
+- .NET 9.0 or later
+
+
+### Via NuGet Package Manager (Not currently available)
 
 Install the package via NuGet Package Manager:
 
@@ -98,8 +106,8 @@ The property value is automatically converted to a strongly-typed `SeoMetaModel`
 
 ## Technical Details
 
-- **Umbraco Compatibility**: Umbraco 13.0+
-- **Framework**: .NET 8.0
+- **Umbraco Compatibility**: Umbraco 16.0+
+- **Framework**: .NET 9.0
 - **Frontend**: LitElement with TypeScript
 - **Data Storage**: JSON format
 - **Property Value Converter**: Automatic conversion to `SeoMetaModel`
@@ -121,8 +129,8 @@ The property editor automatically adapts to different screen sizes:
 
 ## Requirements
 
-- Umbraco 13.0 or later
-- .NET 8.0 or later
+- Umbraco 16.0 or later
+- .NET 9.0 or later
 
 ## Contributing
 

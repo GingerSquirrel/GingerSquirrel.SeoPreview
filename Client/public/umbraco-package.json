@@ -1,7 +1,7 @@
 {
   "id": "GingerSquirrel.SeoPreview",
   "name": "GingerSquirrel SEO Preview",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "allowTelemetry": true,
   "extensions": [
     {
