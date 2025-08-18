@@ -9,7 +9,7 @@ namespace GingerSquirrel.SeoPreview.PropertyValueConverters
     {
         public override bool IsConverter(IPublishedPropertyType propertyType)
         {
-            return propertyType.EditorAlias.Equals("GingerSquirrel.SEOPreview");
+            return propertyType.EditorAlias.Equals("GingerSquirrel.PropertyEditorUi.SEOPreview", StringComparison.OrdinalIgnoreCase);
         }
 
         public override object? ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object? source, bool preview)
@@ -21,7 +21,8 @@ namespace GingerSquirrel.SeoPreview.PropertyValueConverters
 
             try
             {
-                return JsonSerializer.Deserialize<SeoMetaModel>(sourceString);
+                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                return JsonSerializer.Deserialize<SeoMetaModel>(sourceString, options);
             }
             catch (JsonException)
             {
@@ -40,3 +41,5 @@ namespace GingerSquirrel.SeoPreview.PropertyValueConverters
         }
     }
 }
+
+

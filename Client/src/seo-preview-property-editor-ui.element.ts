@@ -1,29 +1,29 @@
 import { LitElement, html, css, customElement, property } from '@umbraco-cms/backoffice/external/lit';
 
 interface SEOData {
-    metaTitle: string;
-    metaDescription: string;
+    MetaTitle: string;
+    MetaDescription: string;
 }
 
 @customElement('ginger-squirrel-seo-preview-property-editor-ui')
 export default class GingerSquirrelSEOPreviewPropertyEditorUIElement extends LitElement {
     @property({ type: Object })
     public value: SEOData = {
-        metaTitle: '',
-        metaDescription: ''
+        MetaTitle: '',
+        MetaDescription: ''
     };
 
     // Ensure value is always properly initialized
     private get seoData(): SEOData {
         if (!this.value || typeof this.value !== 'object') {
             return {
-                metaTitle: '',
-                metaDescription: ''
+                MetaTitle: '',
+                MetaDescription: ''
             };
         }
         return {
-            metaTitle: this.value.metaTitle || '',
-            metaDescription: this.value.metaDescription || ''
+            MetaTitle: this.value.MetaTitle || '',
+            MetaDescription: this.value.MetaDescription || ''
         };
     }
 
@@ -38,15 +38,15 @@ export default class GingerSquirrelSEOPreviewPropertyEditorUIElement extends Lit
     }
 
     private _onTitleInput(e: InputEvent) {
-        const metaTitle = (e.target as HTMLInputElement).value;
+        const MetaTitle = (e.target as HTMLInputElement).value;
         const currentData = this.seoData; // Use the safe getter
-        this._updateValue({ ...currentData, metaTitle });
+        this._updateValue({ ...currentData, MetaTitle });
     }
 
     private _onDescriptionInput(e: InputEvent) {
-        const metaDescription = (e.target as HTMLInputElement).value;
+        const MetaDescription = (e.target as HTMLInputElement).value;
         const currentData = this.seoData; // Use the safe getter
-        this._updateValue({ ...currentData, metaDescription });
+        this._updateValue({ ...currentData, MetaDescription });
     }
 
     private _truncateText(text: string, maxLength: number): string {
@@ -67,8 +67,8 @@ export default class GingerSquirrelSEOPreviewPropertyEditorUIElement extends Lit
 
     override render() {
         const seoData = this.seoData; // Use the safe getter
-        const truncatedTitle = this._truncateText(seoData.metaTitle, 60);
-        const truncatedDescription = this._truncateText(seoData.metaDescription, 155);
+        const truncatedTitle = this._truncateText(seoData.MetaTitle, 60);
+        const truncatedDescription = this._truncateText(seoData.MetaDescription, 155);
 
         return html`
             <div class="seo-editor">
@@ -79,11 +79,11 @@ export default class GingerSquirrelSEOPreviewPropertyEditorUIElement extends Lit
                             id="meta-title"
                             class="title-input"
                             placeholder="Enter your page title..."
-                            .value=${seoData.metaTitle}
+                            .value=${seoData.MetaTitle}
                             @input=${this._onTitleInput}
                         ></uui-input>
-                        <div class="character-count ${this._getCharacterCountClass(seoData.metaTitle, 60)}">
-                            ${this._getCharacterCount(seoData.metaTitle, 60)} characters (recommended: 50-60)
+                        <div class="character-count ${this._getCharacterCountClass(seoData.MetaTitle, 60)}">
+                            ${this._getCharacterCount(seoData.MetaTitle, 60)} characters (recommended: 50-60)
                         </div>
                     </div>
 
@@ -93,12 +93,12 @@ export default class GingerSquirrelSEOPreviewPropertyEditorUIElement extends Lit
                             id="meta-description"
                             class="description-input"
                             placeholder="Enter your page description..."
-                            .value=${seoData.metaDescription}
+                            .value=${seoData.MetaDescription}
                             @input=${this._onDescriptionInput}
                             rows="3"
                         ></uui-textarea>
-                        <div class="character-count ${this._getCharacterCountClass(seoData.metaDescription, 155)}">
-                            ${this._getCharacterCount(seoData.metaDescription, 155)} characters (recommended: 120-155)
+                        <div class="character-count ${this._getCharacterCountClass(seoData.MetaDescription, 155)}">
+                            ${this._getCharacterCount(seoData.MetaDescription, 155)} characters (recommended: 120-155)
                         </div>
                     </div>
                 </div>
