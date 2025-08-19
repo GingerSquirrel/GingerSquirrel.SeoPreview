@@ -90,17 +90,37 @@ The property editor stores data as JSON with the following structure:
 
 ## Accessing Values in Templates
 
-The property value is automatically converted to a strongly-typed `SeoMetaModel`:
+The property value is automatically converted to a strongly-typed `SeoMetaModel`.
+
+### With ModelsBuilder (recommended)
+
+If you use Umbraco ModelsBuilder and your property alias is `seoPreview`, you can access the data directly:
+
+```csharp
+<title>@Model.seoPreview.MetaTitle</title>
+<meta name="description" content="@Model.seoPreview.MetaDescription" />
+```
+
+Or, for any property alias (e.g., `seo`):
+
+```csharp
+<title>@Model.seo.MetaTitle</title>
+<meta name="description" content="@Model.seo.MetaDescription" />
+```
+
+### Without ModelsBuilder
+
+If you are not using ModelsBuilder, you can still access the data using:
 
 ```csharp
 @{
-    var seoData = Model.Value<SeoMetaModel>("seoPreview");
+  var seoData = Model.Value<SeoMetaModel>("seoPreview");
 }
 
 @if (seoData != null)
 {
-    <title>@seoData.MetaTitle</title>
-    <meta name="description" content="@seoData.MetaDescription" />
+  <title>@seoData.MetaTitle</title>
+  <meta name="description" content="@seoData.MetaDescription" />
 }
 ```
 

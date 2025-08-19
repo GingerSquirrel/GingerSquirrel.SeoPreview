@@ -14,4 +14,4 @@ dotnet build --configuration Release
 echo "Creating NuGet package..."
 dotnet pack --configuration Release
 
-echo "Package created at: bin/Release/GingerSquirrel.SeoPreview.1.0.0.nupkg"
+echo "Package created at: bin/Release/GingerSquirrel.SeoPreview.0.0.2.nupkg"

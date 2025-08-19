@@ -41,5 +41,3 @@ namespace GingerSquirrel.SeoPreview.PropertyValueConverters
         }
     }
 }
-
-
