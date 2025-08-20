@@ -33,7 +33,8 @@ namespace GingerSquirrel.SeoPreview.Extensions
 
             if (string.IsNullOrEmpty(seoAlias)) return new SeoMetaModel();
 
-            var rawValue = content.Value(seoAlias)?.ToString();
+            var property = content.GetProperty(seoAlias);
+            var rawValue = property?.GetSourceValue()?.ToString();
             if (string.IsNullOrWhiteSpace(rawValue)) return new SeoMetaModel();
 
             try

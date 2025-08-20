@@ -5,6 +5,9 @@
 
 A comprehensive SEO preview property editor for Umbraco that provides real-time Google search result previews, character count validation, and intuitive meta title and description editing.
 
+![SEO Preview Example](docs/SEOpreview.png)
+
+
 **Compatibility:** Only works with Umbraco 16.0 and above. Requires .NET 9.0 or later.
 
 ## Features
@@ -16,6 +19,23 @@ A comprehensive SEO preview property editor for Umbraco that provides real-time 
 - 🔧 **Easy Integration** - Simple property editor that stores data as JSON
 
 ## Installation
+
+### Important Configuration
+
+To enable strongly-typed access to SEO data, ensure you have the following in your `appsettings.json`:
+
+```json
+"Umbraco":{
+  "CMS":{
+    "ModelsBuilder":{
+      "EnablePropertyValueConverters": true
+    }
+  }
+}
+
+```
+
+This setting is required for Umbraco to use custom property value converters like the one provided by this package.
 
 ### Requirements
 

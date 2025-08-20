@@ -227,7 +227,7 @@ export default class GingerSquirrelSEOPreviewPropertyEditorUIElement extends Lit
                 max-width: 600px;
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 1100px) {
                 .seo-editor {
                     flex-direction: row;
                     gap: 32px;
