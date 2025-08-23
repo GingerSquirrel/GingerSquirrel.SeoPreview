@@ -127,21 +127,21 @@ namespace GingerSquirrel.SeoPreview.Extensions
         }
 
         /// <summary>
-        /// Gets the SEO status CSS class for styling purposes
+        /// Gets the SEO status
         /// </summary>
         /// <param name="content">The published content</param>
-        /// <returns>CSS class representing SEO status</returns>
-        public static string GetSeoStatusClass(this IPublishedContent content)
+        /// <returns>SEO status</returns>
+        public static string GetSeoStatus(this IPublishedContent content)
         {
             var seoData = content?.GetSeoMetaModel();
             if (seoData != null)
             {
                 var warnings = GetSeoWarningsFromData(seoData);
-                if (warnings.Count == 0) return "seo-excellent";
-                if (warnings.Count <= 2) return "seo-good";
-                return "seo-poor";
+                if (warnings.Count == 0) return "sexcellent";
+                if (warnings.Count <= 2) return "good";
+                return "poor";
             }
-            return "seo-unknown";
+            return "unknown";
         }
     }
 }

@@ -15,7 +15,6 @@ A comprehensive SEO preview property editor for Umbraco that provides real-time 
 - 🔍 **Real-time Google Search Preview** - See exactly how your page will appear in Google search results
 - 📊 **Character Count Validation** - Visual indicators for optimal meta title (50-60 chars) and description (120-155 chars) lengths
 - 🎨 **Modern UI** - Clean, responsive interface that works seamlessly in the Umbraco backoffice
-- ⚡ **Lightweight** - Built with LitElement for optimal performance
 - 🔧 **Easy Integration** - Simple property editor that stores data as JSON
 
 ## Installation
@@ -110,6 +109,13 @@ The property editor stores data as JSON with the following structure:
 
 ## Accessing Values in Templates
 
+> **Note:**
+> Add the following to the top of your Razor page to ensure the SEO model and extension methods are available:
+> ```csharp
+> @using GingerSquirrel.SeoPreview.Models;
+> @using GingerSquirrel.SeoPreview.Extensions;
+> ```
+
 The property value is automatically converted to a strongly-typed `SeoMetaModel`.
 
 ### With ModelsBuilder (recommended)
@@ -144,6 +150,25 @@ If you are not using ModelsBuilder, you can still access the data using:
 }
 ```
 
+## Extension Methods
+
+The following extension methods are available for accessing and evaluating SEO data on any `IPublishedContent` (e.g., `Model` in Razor):
+
+| Method | Description |
+|--------|-------------|
+| `GetSeoMetaModel()` | Returns the strongly-typed `SeoMetaModel` from the first property using the SEO editor alias on the content. |
+| `GetMetaTitle(bool fallbackToName = true)` | Returns the meta title from the SEO data, or the content name if not set and `fallbackToName` is true. |
+| `GetMetaDescription()` | Returns the meta description from the SEO data, or an empty string if not set. |
+| `HasGoodSeo()` | Returns `true` if the SEO data passes all validation checks (no warnings), otherwise `false`. |
+| `GetSeoWarnings()` | Returns a list of warnings (as strings) about the SEO data, such as missing or too short/long meta title or description. |
+| `GetSeoStatus()` | Returns a string representing the SEO status: `excellent`, `good`, `poor`, or `unknown`. |
+
+These methods are available when you add:
+```csharp
+@using GingerSquirrel.SeoPreview.Extensions;
+```
+to the top of your Razor page.
+
 ## Technical Details
 
 - **Umbraco Compatibility**: Umbraco 16.0+
@@ -152,34 +177,3 @@ If you are not using ModelsBuilder, you can still access the data using:
 - **Data Storage**: JSON format
 - **Property Value Converter**: Automatic conversion to `SeoMetaModel`
 
-## Features in Detail
-
-### Real-time Preview
-As content editors type, they see exactly how their meta title and description will appear in Google search results, including proper truncation and styling.
-
-### Character Count Validation
-- **Meta Title**: Optimal range 50-60 characters (recommended by Google)
-- **Meta Description**: Optimal range 120-155 characters (recommended by Google)
-- **Visual Indicators**: Green (good), amber (near limit), red (over limit)
-
-### Responsive Design
-The property editor automatically adapts to different screen sizes:
-- **Desktop**: Side-by-side input and preview layout
-- **Mobile/Tablet**: Stacked layout for optimal usability
-
-## Requirements
-
-- Umbraco 16.0 or later
-- .NET 9.0 or later
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit issues and pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the package details for more information.
-
-## Support
-
-For support, please create an issue on the GitHub repository or contact the package maintainers.
